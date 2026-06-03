@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/BossDeathEffect.cs" id="1_boss_death_script"]
+
+[node name="BossDeathEffect" type="Node2D"]
+script = ExtResource("1_boss_death_script")
+
+[node name="BlastOuter" type="Polygon2D" parent="."]
+color = Color(1, 0.08, 0.02, 0.7)
+polygon = PackedVector2Array(0, -130, 22, -46, 100, -82, 46, -22, 130, 0, 46, 22, 100, 82, 22, 46, 0, 130, -22, 46, -100, 82, -46, 22, -130, 0, -46, -22, -100, -82, -22, -46)
+
+[node name="BlastMiddle" type="Polygon2D" parent="."]
+color = Color(1, 0.5, 0.08, 0.85)
+polygon = PackedVector2Array(0, -82, 26, -34, 82, 0, 26, 34, 0, 82, -26, 34, -82, 0, -26, -34)
+
+[node name="BlastCore" type="Polygon2D" parent="."]
+color = Color(1, 0.95, 0.4, 1)
+polygon = PackedVector2Array(0, -42, 30, -30, 42, 0, 30, 30, 0, 42, -30, 30, -42, 0, -30, -30)

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Scripts/SpeedPowerup.cs" id="1_speed_script"]
+
+[sub_resource type="CircleShape2D" id="SpeedPowerShape"]
+radius = 18.0
+
+[node name="SpeedPowerup" type="Area2D"]
+script = ExtResource("1_speed_script")
+
+[node name="Aura" type="Polygon2D" parent="."]
+color = Color(0.35, 1, 0.3, 0.35)
+polygon = PackedVector2Array(0, -30, 30, 0, 0, 30, -30, 0)
+
+[node name="BootLeft" type="Polygon2D" parent="."]
+color = Color(0.15, 0.95, 0.35, 1)
+polygon = PackedVector2Array(-19, -8, -3, -8, -3, 10, -24, 10, -24, 1, -19, 1)
+
+[node name="BootRight" type="Polygon2D" parent="."]
+color = Color(0.1, 0.75, 0.28, 1)
+polygon = PackedVector2Array(1, -8, 17, -8, 17, 10, -4, 10, -4, 1, 1, 1)
+
+[node name="Lightning" type="Polygon2D" parent="."]
+color = Color(1, 1, 0.25, 1)
+polygon = PackedVector2Array(3, -24, -8, -2, 3, -2, -3, 22, 14, -8, 3, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SpeedPowerShape")

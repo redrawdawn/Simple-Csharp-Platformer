@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Scripts/SwayingGrass.cs" id="1_grass_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_grass"]
+size = Vector2(64, 38)
+
+[node name="SwayingGrass" type="Area2D"]
+script = ExtResource("1_grass_script")
+
+[node name="Blades" type="Node2D" parent="."]
+
+[node name="Blade1" type="Polygon2D" parent="Blades"]
+position = Vector2(-22, 0)
+color = Color(0.16, 0.66, 0.22, 1)
+polygon = PackedVector2Array(-5, 0, 0, -32, 5, 0)
+
+[node name="Blade2" type="Polygon2D" parent="Blades"]
+position = Vector2(-8, 0)
+color = Color(0.22, 0.82, 0.28, 1)
+polygon = PackedVector2Array(-5, 0, 2, -38, 6, 0)
+
+[node name="Blade3" type="Polygon2D" parent="Blades"]
+position = Vector2(7, 0)
+color = Color(0.14, 0.58, 0.2, 1)
+polygon = PackedVector2Array(-6, 0, -1, -30, 6, 0)
+
+[node name="Blade4" type="Polygon2D" parent="Blades"]
+position = Vector2(22, 0)
+color = Color(0.24, 0.76, 0.3, 1)
+polygon = PackedVector2Array(-5, 0, 1, -35, 5, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_grass")

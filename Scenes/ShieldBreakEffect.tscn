@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/ShieldBreakEffect.cs" id="1_shield_break_script"]
+
+[node name="ShieldBreakEffect" type="Node2D"]
+script = ExtResource("1_shield_break_script")
+
+[node name="Ring" type="Polygon2D" parent="."]
+color = Color(0.35, 0.9, 1, 0.8)
+polygon = PackedVector2Array(0, -44, 12, -16, 44, 0, 12, 16, 0, 44, -12, 16, -44, 0, -12, -16)
+
+[node name="SparkA" type="Polygon2D" parent="."]
+color = Color(0.9, 1, 1, 1)
+polygon = PackedVector2Array(0, -28, 6, -6, 28, 0, 6, 6, 0, 28, -6, 6, -28, 0, -6, -6)
+
+[node name="SparkB" type="Polygon2D" parent="."]
+rotation = 0.785398
+color = Color(0.25, 0.75, 1, 0.9)
+polygon = PackedVector2Array(0, -22, 5, -5, 22, 0, 5, 5, 0, 22, -5, 5, -22, 0, -5, -5)

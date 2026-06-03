@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scripts/MovingPlatform.cs" id="1_moving_platform"]
+
+[sub_resource type="RectangleShape2D" id="MovingPlatformShape"]
+size = Vector2(180, 28)
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+script = ExtResource("1_moving_platform")
+
+[node name="Body" type="Polygon2D" parent="."]
+color = Color(0.34, 0.35, 0.38, 1)
+polygon = PackedVector2Array(-90, -14, 90, -14, 90, 14, -90, 14)
+
+[node name="RockTop" type="Polygon2D" parent="."]
+color = Color(0.62, 0.64, 0.68, 1)
+polygon = PackedVector2Array(-90, -14, 90, -14, 90, -5, -90, -5)
+
+[node name="CrystalMarks" type="Polygon2D" parent="."]
+color = Color(0.45, 0.9, 1, 0.45)
+polygon = PackedVector2Array(-62, -8, -35, -8, -48, -2, 24, -9, 56, -9, 40, -3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("MovingPlatformShape")

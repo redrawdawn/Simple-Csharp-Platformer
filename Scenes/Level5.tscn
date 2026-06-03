@@ -1,0 +1,529 @@
+[gd_scene format=3 uid="uid://bp1uic6ln6b14"]
+
+[ext_resource type="Script" uid="uid://7fss853op0w0" path="res://Scripts/GameManager.cs" id="1_game_manager"]
+[ext_resource type="PackedScene" path="res://Scenes/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://Scenes/Coin.tscn" id="3_coin"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemy.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" path="res://Scenes/Crate.tscn" id="5_crate"]
+[ext_resource type="PackedScene" path="res://Scenes/BouncePad.tscn" id="6_bounce"]
+[ext_resource type="PackedScene" path="res://Scenes/IcePatch.tscn" id="7_ice"]
+[ext_resource type="PackedScene" path="res://Scenes/MovingPlatform.tscn" id="8_moving_platform"]
+[ext_resource type="PackedScene" path="res://Scenes/LevelPortal.tscn" id="9_portal"]
+[ext_resource type="PackedScene" path="res://Scenes/SpeedPowerup.tscn" id="10_speed"]
+[ext_resource type="Script" uid="uid://c3pebxjn8nvd6" path="res://Scripts/BossExitController.cs" id="11_boss_exit"]
+[ext_resource type="PackedScene" path="res://Scenes/BossEnemy.tscn" id="12_boss"]
+[ext_resource type="PackedScene" path="res://Scenes/CheckpointFlag.tscn" id="13_flag"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldPowerup.tscn" id="14_shield"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(1300, 40)
+
+[sub_resource type="RectangleShape2D" id="LongGroundShape"]
+size = Vector2(1800, 40)
+
+[sub_resource type="RectangleShape2D" id="ArenaShape"]
+size = Vector2(2400, 40)
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(230, 28)
+
+[sub_resource type="RectangleShape2D" id="WidePlatformShape"]
+size = Vector2(380, 28)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ui"]
+font_size = 28
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D" unique_id=1013422412]
+script = ExtResource("1_game_manager")
+TotalCoins = 34
+LevelNumber = 5
+NextLevelButtonText = "Boss Arena"
+BossMusicStartX = 9980.0
+
+[node name="BossExitController" type="Node" parent="." unique_id=580620292]
+script = ExtResource("11_boss_exit")
+ExitPlatformPath = NodePath("../BossExitPlatform")
+
+[node name="Background" type="ColorRect" parent="." unique_id=571889055]
+offset_left = -500.0
+offset_top = -600.0
+offset_right = 12800.0
+offset_bottom = 1000.0
+color = Color(0.06, 0.07, 0.1, 1)
+
+[node name="StormSky" type="Polygon2D" parent="." unique_id=355685784]
+color = Color(0.12, 0.14, 0.2, 1)
+polygon = PackedVector2Array(-500, -600, 12800, -600, 12800, 210, -500, 320)
+
+[node name="DistantPeaks" type="Polygon2D" parent="." unique_id=1424826846]
+color = Color(0.18, 0.2, 0.26, 1)
+polygon = PackedVector2Array(-500, 432, 100, 80, 650, 432, 1250, 120, 1800, 432, 2450, 65, 3150, 432, 3820, 130, 4550, 432, 5300, 85, 6100, 432, 7000, 105, 7800, 432, 8650, 70, 9450, 432, 10300, 95, 11100, 432, 12000, 110, 12800, 432)
+
+[node name="NearCliffs" type="Polygon2D" parent="." unique_id=45868020]
+color = Color(0.26, 0.27, 0.31, 1)
+polygon = PackedVector2Array(-500, 432, 240, 300, 780, 432, 1450, 280, 2100, 432, 2950, 270, 3600, 432, 4450, 290, 5200, 432, 6100, 275, 6900, 432, 7900, 260, 8800, 432, 9900, 250, 10950, 432, 11900, 280, 12800, 432)
+
+[node name="Lightning1" type="Polygon2D" parent="." unique_id=1853295857]
+color = Color(0.72, 0.9, 1, 0.55)
+polygon = PackedVector2Array(1550, -40, 1490, 115, 1550, 95, 1470, 250, 1630, 55, 1570, 75)
+
+[node name="Lightning2" type="Polygon2D" parent="." unique_id=2069604011]
+color = Color(0.65, 0.78, 1, 0.38)
+polygon = PackedVector2Array(7620, -70, 7540, 120, 7610, 95, 7500, 285, 7705, 60, 7635, 83)
+
+[node name="ArenaGlow" type="Polygon2D" parent="." unique_id=163941138]
+color = Color(0.55, 0.15, 0.95, 0.18)
+polygon = PackedVector2Array(10200, 432, 11350, -120, 12600, 432)
+
+[node name="Player" parent="." unique_id=578270126 instance=ExtResource("2_player")]
+position = Vector2(90, 360)
+
+[node name="Level" type="Node2D" parent="." unique_id=639695400]
+
+[node name="GroundStart" type="StaticBody2D" parent="Level" unique_id=934117463]
+position = Vector2(550, 432)
+
+[node name="Body" type="Polygon2D" parent="Level/GroundStart" unique_id=307135478]
+color = Color(0.24, 0.24, 0.27, 1)
+polygon = PackedVector2Array(-650, -20, 650, -20, 650, 20, -650, 20)
+
+[node name="Top" type="Polygon2D" parent="Level/GroundStart" unique_id=1167684439]
+color = Color(0.48, 0.49, 0.53, 1)
+polygon = PackedVector2Array(-650, -20, 650, -20, 650, -6, -650, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/GroundStart" unique_id=1528447840]
+shape = SubResource("GroundShape")
+
+[node name="GroundMid" type="StaticBody2D" parent="Level" unique_id=249372502]
+position = Vector2(2550, 432)
+
+[node name="Body" type="Polygon2D" parent="Level/GroundMid" unique_id=1256057854]
+color = Color(0.22, 0.22, 0.25, 1)
+polygon = PackedVector2Array(-900, -20, 900, -20, 900, 20, -900, 20)
+
+[node name="Top" type="Polygon2D" parent="Level/GroundMid" unique_id=889167077]
+color = Color(0.44, 0.45, 0.49, 1)
+polygon = PackedVector2Array(-900, -20, 900, -20, 900, -6, -900, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/GroundMid" unique_id=585227760]
+shape = SubResource("LongGroundShape")
+
+[node name="GroundGauntlet" type="StaticBody2D" parent="Level" unique_id=1421453487]
+position = Vector2(5200, 432)
+
+[node name="Body" type="Polygon2D" parent="Level/GroundGauntlet" unique_id=1169524236]
+color = Color(0.2, 0.2, 0.24, 1)
+polygon = PackedVector2Array(-900, -20, 900, -20, 900, 20, -900, 20)
+
+[node name="Top" type="Polygon2D" parent="Level/GroundGauntlet" unique_id=444132387]
+color = Color(0.42, 0.43, 0.48, 1)
+polygon = PackedVector2Array(-900, -20, 900, -20, 900, -6, -900, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/GroundGauntlet" unique_id=1383246693]
+shape = SubResource("LongGroundShape")
+
+[node name="GroundBridge" type="StaticBody2D" parent="Level" unique_id=2111115241]
+position = Vector2(7900, 432)
+
+[node name="Body" type="Polygon2D" parent="Level/GroundBridge" unique_id=640190935]
+color = Color(0.18, 0.18, 0.22, 1)
+polygon = PackedVector2Array(-1100, -20, 1100, -20, 1100, 20, -1100, 20)
+
+[node name="Top" type="Polygon2D" parent="Level/GroundBridge" unique_id=1438382983]
+color = Color(0.38, 0.39, 0.45, 1)
+polygon = PackedVector2Array(-1100, -20, 1100, -20, 1100, -6, -1100, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/GroundBridge" unique_id=169640294]
+shape = SubResource("ArenaShape")
+
+[node name="GroundArena" type="StaticBody2D" parent="Level" unique_id=1055721807]
+position = Vector2(11100, 432)
+
+[node name="Body" type="Polygon2D" parent="Level/GroundArena" unique_id=932394170]
+color = Color(0.15, 0.15, 0.19, 1)
+polygon = PackedVector2Array(-1200, -20, 1200, -20, 1200, 20, -1200, 20)
+
+[node name="Top" type="Polygon2D" parent="Level/GroundArena" unique_id=1590694461]
+color = Color(0.34, 0.32, 0.42, 1)
+polygon = PackedVector2Array(-1200, -20, 1200, -20, 1200, -4, -1200, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/GroundArena" unique_id=448804069]
+shape = SubResource("ArenaShape")
+
+[node name="StaticStep1" type="StaticBody2D" parent="Level" unique_id=222385294]
+position = Vector2(980, 315)
+
+[node name="Body" type="Polygon2D" parent="Level/StaticStep1" unique_id=944798690]
+color = Color(0.29, 0.3, 0.34, 1)
+polygon = PackedVector2Array(-115, -14, 115, -14, 115, 14, -115, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/StaticStep1" unique_id=1547868684]
+color = Color(0.52, 0.54, 0.58, 1)
+polygon = PackedVector2Array(-115, -14, 115, -14, 115, -5, -115, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/StaticStep1" unique_id=574841597]
+shape = SubResource("PlatformShape")
+
+[node name="StaticStep2" type="StaticBody2D" parent="Level" unique_id=676516392]
+position = Vector2(6100, 250)
+
+[node name="Body" type="Polygon2D" parent="Level/StaticStep2" unique_id=177498640]
+color = Color(0.24, 0.25, 0.29, 1)
+polygon = PackedVector2Array(-190, -14, 190, -14, 190, 14, -190, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/StaticStep2" unique_id=470725360]
+color = Color(0.45, 0.47, 0.52, 1)
+polygon = PackedVector2Array(-190, -14, 190, -14, 190, -5, -190, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/StaticStep2" unique_id=319635010]
+shape = SubResource("WidePlatformShape")
+
+[node name="HighPlatform1" type="StaticBody2D" parent="Level" unique_id=537366758]
+position = Vector2(7850, 330)
+
+[node name="Body" type="Polygon2D" parent="Level/HighPlatform1" unique_id=1903527258]
+color = Color(0.25, 0.26, 0.31, 1)
+polygon = PackedVector2Array(-115, -14, 115, -14, 115, 14, -115, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/HighPlatform1" unique_id=1259522191]
+color = Color(0.48, 0.5, 0.58, 1)
+polygon = PackedVector2Array(-115, -14, 115, -14, 115, -5, -115, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/HighPlatform1" unique_id=1965729649]
+shape = SubResource("PlatformShape")
+
+[node name="HighPlatform2" type="StaticBody2D" parent="Level" unique_id=516996648]
+position = Vector2(8200, 250)
+
+[node name="Body" type="Polygon2D" parent="Level/HighPlatform2" unique_id=1694740858]
+color = Color(0.23, 0.24, 0.29, 1)
+polygon = PackedVector2Array(-115, -14, 115, -14, 115, 14, -115, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/HighPlatform2" unique_id=1744665559]
+color = Color(0.45, 0.47, 0.55, 1)
+polygon = PackedVector2Array(-115, -14, 115, -14, 115, -5, -115, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/HighPlatform2" unique_id=1999272327]
+shape = SubResource("PlatformShape")
+
+[node name="HighPlatform3" type="StaticBody2D" parent="Level" unique_id=456308539]
+position = Vector2(8550, 170)
+
+[node name="Body" type="Polygon2D" parent="Level/HighPlatform3" unique_id=359171965]
+color = Color(0.21, 0.22, 0.28, 1)
+polygon = PackedVector2Array(-115, -14, 115, -14, 115, 14, -115, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/HighPlatform3" unique_id=2134139849]
+color = Color(0.42, 0.45, 0.54, 1)
+polygon = PackedVector2Array(-115, -14, 115, -14, 115, -5, -115, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/HighPlatform3" unique_id=729890713]
+shape = SubResource("PlatformShape")
+
+[node name="HighPlatform4" type="StaticBody2D" parent="Level" unique_id=1474482561]
+position = Vector2(8900, 90)
+
+[node name="Body" type="Polygon2D" parent="Level/HighPlatform4" unique_id=1098005897]
+color = Color(0.19, 0.2, 0.26, 1)
+polygon = PackedVector2Array(-190, -14, 190, -14, 190, 14, -190, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/HighPlatform4" unique_id=408810713]
+color = Color(0.38, 0.42, 0.52, 1)
+polygon = PackedVector2Array(-190, -14, 190, -14, 190, -5, -190, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/HighPlatform4" unique_id=1405618335]
+shape = SubResource("WidePlatformShape")
+
+[node name="BossGateLeft" type="Polygon2D" parent="Level" unique_id=1014576319]
+position = Vector2(10020, 320)
+color = Color(0.1, 0.08, 0.16, 1)
+polygon = PackedVector2Array(-40, 92, -22, -170, 22, -170, 40, 92)
+
+[node name="BossGateRight" type="Polygon2D" parent="Level" unique_id=1889365095]
+position = Vector2(12200, 320)
+color = Color(0.1, 0.08, 0.16, 1)
+polygon = PackedVector2Array(-40, 92, -22, -170, 22, -170, 40, 92)
+
+[node name="BossSymbol" type="Polygon2D" parent="Level" unique_id=1178315370]
+visible = false
+position = Vector2(11100, 180)
+color = Color(0.72, 0.25, 1, 0.8)
+polygon = PackedVector2Array(0, -90, 58, -58, 90, 0, 58, 58, 0, 90, -58, 58, -90, 0, -58, -58)
+
+[node name="BossSymbolCore" type="Polygon2D" parent="Level" unique_id=797116452]
+visible = false
+position = Vector2(11100, 180)
+color = Color(0.95, 0.9, 1, 0.6)
+polygon = PackedVector2Array(0, -40, 28, -28, 40, 0, 28, 28, 0, 40, -28, 28, -40, 0, -28, -28)
+
+[node name="SpeedPowerup" parent="." unique_id=1521155518 instance=ExtResource("10_speed")]
+position = Vector2(420, 355)
+
+[node name="CheckpointFlag" parent="." unique_id=1109505685 instance=ExtResource("13_flag")]
+position = Vector2(8830, 35)
+
+[node name="ShieldPowerup" parent="." unique_id=578169211 instance=ExtResource("14_shield")]
+position = Vector2(8970, 44)
+
+[node name="BossEnemy" parent="." unique_id=1117968491 instance=ExtResource("12_boss")]
+position = Vector2(11100, 140)
+PatrolDistance = 780.0
+
+[node name="MovingPlatformH1" parent="." unique_id=183779909 instance=ExtResource("8_moving_platform")]
+position = Vector2(1420, 305)
+TravelOffset = Vector2(350, 0)
+MoveSpeed = 1.2
+
+[node name="MovingPlatformV1" parent="." unique_id=1283035737 instance=ExtResource("8_moving_platform")]
+position = Vector2(2050, 340)
+TravelOffset = Vector2(0, -210)
+MoveSpeed = 1.05
+
+[node name="MovingPlatformH2" parent="." unique_id=1159141257 instance=ExtResource("8_moving_platform")]
+position = Vector2(2750, 250)
+TravelOffset = Vector2(420, 0)
+MoveSpeed = 1.4
+
+[node name="MovingPlatformV2" parent="." unique_id=1818679755 instance=ExtResource("8_moving_platform")]
+position = Vector2(3550, 330)
+TravelOffset = Vector2(0, -240)
+MoveSpeed = 1.15
+
+[node name="MovingPlatformH3" parent="." unique_id=2063310068 instance=ExtResource("8_moving_platform")]
+position = Vector2(4550, 310)
+TravelOffset = Vector2(390, 0)
+MoveSpeed = 1.55
+
+[node name="MovingPlatformV3" parent="." unique_id=1225130055 instance=ExtResource("8_moving_platform")]
+position = Vector2(5450, 350)
+TravelOffset = Vector2(0, -230)
+MoveSpeed = 1.25
+
+[node name="MovingPlatformH4" parent="." unique_id=887034205 instance=ExtResource("8_moving_platform")]
+position = Vector2(6750, 280)
+TravelOffset = Vector2(450, 0)
+MoveSpeed = 1.7
+
+[node name="MovingPlatformV4" parent="." unique_id=1559897494 instance=ExtResource("8_moving_platform")]
+position = Vector2(7600, 350)
+TravelOffset = Vector2(0, -260)
+MoveSpeed = 1.35
+
+[node name="MovingPlatformH5" parent="." unique_id=442304886 instance=ExtResource("8_moving_platform")]
+position = Vector2(8450, 260)
+TravelOffset = Vector2(420, 0)
+MoveSpeed = 1.8
+
+[node name="BossExitPlatform" parent="." unique_id=206375964 instance=ExtResource("8_moving_platform")]
+position = Vector2(12400, 428)
+TravelOffset = Vector2(0, -285)
+MoveSpeed = 1.05
+StartsActive = false
+
+[node name="Crate1" parent="." unique_id=571826076 instance=ExtResource("5_crate")]
+position = Vector2(1180, 360)
+
+[node name="Crate2" parent="." unique_id=1668037117 instance=ExtResource("5_crate")]
+position = Vector2(4980, 360)
+
+[node name="Crate3" parent="." unique_id=2107308846 instance=ExtResource("5_crate")]
+position = Vector2(10180, 360)
+
+[node name="BouncePad1" parent="." unique_id=1683025801 instance=ExtResource("6_bounce")]
+position = Vector2(1780, 403)
+
+[node name="BouncePad2" parent="." unique_id=748817171 instance=ExtResource("6_bounce")]
+position = Vector2(4250, 403)
+
+[node name="BouncePad3" parent="." unique_id=1233378161 instance=ExtResource("6_bounce")]
+position = Vector2(6420, 403)
+
+[node name="BouncePad4" parent="." unique_id=1607563291 instance=ExtResource("6_bounce")]
+position = Vector2(9300, 403)
+
+[node name="IcePatch1" parent="." unique_id=522206439 instance=ExtResource("7_ice")]
+position = Vector2(850, 416)
+
+[node name="IcePatch2" parent="." unique_id=2132735598 instance=ExtResource("7_ice")]
+position = Vector2(3200, 416)
+
+[node name="IcePatch3" parent="." unique_id=742979546 instance=ExtResource("7_ice")]
+position = Vector2(5100, 416)
+
+[node name="IcePatch4" parent="." unique_id=1013181658 instance=ExtResource("7_ice")]
+position = Vector2(7350, 416)
+
+[node name="IcePatch5" parent="." unique_id=765829570 instance=ExtResource("7_ice")]
+position = Vector2(8900, 416)
+
+[node name="Enemy1" parent="." unique_id=731855176 instance=ExtResource("4_enemy")]
+position = Vector2(1650, 394)
+
+[node name="Enemy2" parent="." unique_id=1144766491 instance=ExtResource("4_enemy")]
+position = Vector2(2350, 394)
+
+[node name="Enemy3" parent="." unique_id=808039501 instance=ExtResource("4_enemy")]
+position = Vector2(3300, 394)
+
+[node name="Enemy4" parent="." unique_id=1826812151 instance=ExtResource("4_enemy")]
+position = Vector2(4700, 394)
+
+[node name="Enemy5" parent="." unique_id=1301859455 instance=ExtResource("4_enemy")]
+position = Vector2(5600, 394)
+
+[node name="Enemy6" parent="." unique_id=31171913 instance=ExtResource("4_enemy")]
+position = Vector2(7000, 394)
+
+[node name="Enemy7" parent="." unique_id=1800063821 instance=ExtResource("4_enemy")]
+position = Vector2(8350, 394)
+
+[node name="Enemy8" parent="." unique_id=922778281 instance=ExtResource("4_enemy")]
+position = Vector2(9300, 362)
+
+[node name="ArenaEnemy1" parent="." unique_id=194605275 instance=ExtResource("4_enemy")]
+position = Vector2(10480, 394)
+RespawnWhileBossAlive = true
+
+[node name="ArenaEnemy2" parent="." unique_id=730854501 instance=ExtResource("4_enemy")]
+position = Vector2(11100, 394)
+RespawnWhileBossAlive = true
+
+[node name="ArenaEnemy3" parent="." unique_id=671047440 instance=ExtResource("4_enemy")]
+position = Vector2(11720, 394)
+RespawnWhileBossAlive = true
+
+[node name="ArenaEnemy4" parent="." unique_id=4254383 instance=ExtResource("4_enemy")]
+position = Vector2(12120, 394)
+RespawnWhileBossAlive = true
+
+[node name="Coin1" parent="." unique_id=1260942744 instance=ExtResource("3_coin")]
+position = Vector2(980, 271)
+
+[node name="Coin2" parent="." unique_id=1453234186 instance=ExtResource("3_coin")]
+position = Vector2(1420, 260)
+
+[node name="Coin3" parent="." unique_id=286628054 instance=ExtResource("3_coin")]
+position = Vector2(1770, 260)
+
+[node name="Coin4" parent="." unique_id=1175261024 instance=ExtResource("3_coin")]
+position = Vector2(2050, 160)
+
+[node name="Coin5" parent="." unique_id=1042302859 instance=ExtResource("3_coin")]
+position = Vector2(2750, 205)
+
+[node name="Coin6" parent="." unique_id=960919169 instance=ExtResource("3_coin")]
+position = Vector2(3170, 205)
+
+[node name="Coin7" parent="." unique_id=2056724603 instance=ExtResource("3_coin")]
+position = Vector2(3550, 120)
+
+[node name="Coin8" parent="." unique_id=22979589 instance=ExtResource("3_coin")]
+position = Vector2(4250, 342)
+
+[node name="Coin9" parent="." unique_id=360355954 instance=ExtResource("3_coin")]
+position = Vector2(4550, 265)
+
+[node name="Coin10" parent="." unique_id=1982091565 instance=ExtResource("3_coin")]
+position = Vector2(4940, 265)
+
+[node name="Coin11" parent="." unique_id=1505412288 instance=ExtResource("3_coin")]
+position = Vector2(5450, 135)
+
+[node name="Coin12" parent="." unique_id=466503515 instance=ExtResource("3_coin")]
+position = Vector2(6100, 206)
+
+[node name="Coin13" parent="." unique_id=516947718 instance=ExtResource("3_coin")]
+position = Vector2(6420, 342)
+
+[node name="Coin14" parent="." unique_id=390479649 instance=ExtResource("3_coin")]
+position = Vector2(6750, 235)
+
+[node name="Coin15" parent="." unique_id=2107021164 instance=ExtResource("3_coin")]
+position = Vector2(7200, 235)
+
+[node name="Coin16" parent="." unique_id=756409475 instance=ExtResource("3_coin")]
+position = Vector2(7600, 95)
+
+[node name="Coin17" parent="." unique_id=1247597483 instance=ExtResource("3_coin")]
+position = Vector2(8150, 388)
+
+[node name="Coin18" parent="." unique_id=724979897 instance=ExtResource("3_coin")]
+position = Vector2(8450, 215)
+
+[node name="Coin19" parent="." unique_id=96816883 instance=ExtResource("3_coin")]
+position = Vector2(8870, 215)
+
+[node name="ClimbCoin1" parent="." unique_id=1302153859 instance=ExtResource("3_coin")]
+position = Vector2(7850, 286)
+
+[node name="ClimbCoin2" parent="." unique_id=285444776 instance=ExtResource("3_coin")]
+position = Vector2(8200, 206)
+
+[node name="ClimbCoin3" parent="." unique_id=1117850844 instance=ExtResource("3_coin")]
+position = Vector2(8550, 126)
+
+[node name="ClimbCoin4" parent="." unique_id=582898819 instance=ExtResource("3_coin")]
+position = Vector2(8900, 46)
+
+[node name="Coin20" parent="." unique_id=45393015 instance=ExtResource("3_coin")]
+position = Vector2(9300, 342)
+
+[node name="Coin21" parent="." unique_id=1796388833 instance=ExtResource("3_coin")]
+position = Vector2(9900, 388)
+
+[node name="Coin22" parent="." unique_id=1381511982 instance=ExtResource("3_coin")]
+position = Vector2(10420, 388)
+
+[node name="Coin23" parent="." unique_id=1402626492 instance=ExtResource("3_coin")]
+position = Vector2(10750, 388)
+
+[node name="Coin24" parent="." unique_id=1197720694 instance=ExtResource("3_coin")]
+position = Vector2(11543, 390)
+
+[node name="Coin25" parent="." unique_id=612918288 instance=ExtResource("3_coin")]
+position = Vector2(11413, 392)
+
+[node name="Coin26" parent="." unique_id=1433375834 instance=ExtResource("3_coin")]
+position = Vector2(11680, 388)
+
+[node name="Coin27" parent="." unique_id=1151189034 instance=ExtResource("3_coin")]
+position = Vector2(11980, 388)
+
+[node name="Coin28" parent="." unique_id=872002054 instance=ExtResource("3_coin")]
+position = Vector2(12320, 388)
+
+[node name="Coin29" parent="." unique_id=337111178 instance=ExtResource("3_coin")]
+position = Vector2(11156, 391)
+
+[node name="Coin30" parent="." unique_id=210104229 instance=ExtResource("3_coin")]
+position = Vector2(12480, 388)
+
+[node name="LevelPortal" parent="." unique_id=1306896014 instance=ExtResource("9_portal")]
+position = Vector2(12395, 68)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=558960613]
+
+[node name="CoinLabel" type="Label" parent="UI" unique_id=137220652]
+offset_left = 18.0
+offset_top = 14.0
+offset_right = 190.0
+offset_bottom = 55.0
+text = "0/34"
+label_settings = SubResource("LabelSettings_ui")
+
+[node name="ItemPopup" type="Label" parent="UI" unique_id=683969000]
+offset_left = 18.0
+offset_top = 52.0
+offset_right = 560.0
+offset_bottom = 92.0
+label_settings = SubResource("LabelSettings_ui")
+
+[node name="NextLevelButton" type="Button" parent="UI" unique_id=1472314929]
+visible = false
+offset_left = 382.0
+offset_top = 220.0
+offset_right = 578.0
+offset_bottom = 282.0
+text = "Next Level"

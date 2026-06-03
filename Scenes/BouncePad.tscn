@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Scripts/BouncePad.cs" id="1_bounce_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bounce"]
+size = Vector2(70, 22)
+
+[node name="BouncePad" type="Area2D"]
+script = ExtResource("1_bounce_script")
+
+[node name="Base" type="Polygon2D" parent="."]
+color = Color(0.12, 0.16, 0.24, 1)
+polygon = PackedVector2Array(-38, -6, 38, -6, 32, 12, -32, 12)
+
+[node name="Top" type="Node2D" parent="."]
+
+[node name="Pad" type="Polygon2D" parent="Top"]
+color = Color(0.35, 1, 0.78, 1)
+polygon = PackedVector2Array(-34, -14, 34, -14, 34, 4, -34, 4)
+
+[node name="Stripe" type="Polygon2D" parent="Top"]
+color = Color(1, 1, 1, 0.85)
+polygon = PackedVector2Array(-24, -10, 24, -10, 24, -5, -24, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_bounce")
