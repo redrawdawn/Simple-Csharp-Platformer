@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/PortalBurst.cs" id="1_portal_burst"]
+
+[node name="PortalBurst" type="Node2D"]
+script = ExtResource("1_portal_burst")
+
+[node name="Ring1" type="Polygon2D" parent="."]
+color = Color(0.25, 0.9, 1, 0.85)
+polygon = PackedVector2Array(0, -52, 12, -18, 52, 0, 12, 18, 0, 52, -12, 18, -52, 0, -12, -18)
+
+[node name="Ring2" type="Polygon2D" parent="."]
+rotation = 0.785398
+color = Color(0.85, 0.35, 1, 0.75)
+polygon = PackedVector2Array(0, -40, 10, -14, 40, 0, 10, 14, 0, 40, -10, 14, -40, 0, -10, -14)
+
+[node name="Flash" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.8)
+polygon = PackedVector2Array(0, -28, 20, -20, 28, 0, 20, 20, 0, 28, -20, 20, -28, 0, -20, -20)

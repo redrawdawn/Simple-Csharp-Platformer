@@ -1,0 +1,440 @@
+[gd_scene format=3 uid="uid://jvwydus803qk"]
+
+[ext_resource type="Script" uid="uid://7fss853op0w0" path="res://Scripts/GameManager.cs" id="1_game_manager"]
+[ext_resource type="PackedScene" path="res://Scenes/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://Scenes/Coin.tscn" id="3_coin"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemy.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" path="res://Scenes/Crate.tscn" id="5_crate"]
+[ext_resource type="PackedScene" path="res://Scenes/BouncePad.tscn" id="6_bounce"]
+[ext_resource type="PackedScene" path="res://Scenes/IcePatch.tscn" id="7_ice"]
+[ext_resource type="PackedScene" path="res://Scenes/LevelPortal.tscn" id="8_portal"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(1400, 40)
+
+[sub_resource type="RectangleShape2D" id="GroundWideShape"]
+size = Vector2(2300, 40)
+
+[sub_resource type="RectangleShape2D" id="GroundFarShape"]
+size = Vector2(1500, 40)
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(220, 28)
+
+[sub_resource type="RectangleShape2D" id="WidePlatformShape"]
+size = Vector2(348.5, 28)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ui"]
+font_size = 28
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cp0jt"]
+size = Vector2(300, 28)
+
+[node name="Main2" type="Node2D" unique_id=1314453230]
+script = ExtResource("1_game_manager")
+TotalCoins = 19
+LevelNumber = 3
+NextScenePath = "res://Scenes/Level4.tscn"
+NextLevelButtonText = "Level 4"
+
+[node name="Background" type="ColorRect" parent="." unique_id=1297166166]
+offset_left = -500.0
+offset_top = -420.0
+offset_right = 7600.0
+offset_bottom = 900.0
+color = Color(0.08, 0.16, 0.3, 1)
+
+[node name="Aurora1" type="Polygon2D" parent="." unique_id=1679983347]
+color = Color(0.25, 1, 0.75, 0.22)
+polygon = PackedVector2Array(-200, 70, 900, -60, 1900, 80, 3000, -40, 4400, 90, 6200, -80, 7600, 30, 7600, 170, 6200, 60, 4400, 210, 3000, 80, 1900, 210, 900, 80, -200, 220)
+
+[node name="Aurora2" type="Polygon2D" parent="." unique_id=973897324]
+color = Color(0.65, 0.35, 1, 0.18)
+polygon = PackedVector2Array(200, 150, 1200, 20, 2300, 160, 3400, 35, 5000, 170, 6200, 40, 6200, 165, 5000, 280, 3400, 150, 2300, 290, 1200, 145, 200, 260)
+
+[node name="Moon" type="Polygon2D" parent="." unique_id=1760769308]
+color = Color(0.9, 1, 1, 1)
+polygon = PackedVector2Array(420, 40, 470, 90, 420, 140, 370, 90)
+
+[node name="IceMountainsFar" type="Polygon2D" parent="." unique_id=662156692]
+color = Color(0.25, 0.42, 0.62, 1)
+polygon = PackedVector2Array(-300, 432, 180, 95, 620, 432, 1100, 130, 1580, 432, 2200, 75, 2800, 432, 3500, 120, 4100, 432, 4850, 85, 5600, 432, 6400, 115, 6800, 432, 7350, 105, 7750, 432)
+
+[node name="IceMountainsSnow" type="Polygon2D" parent="." unique_id=1767814740]
+color = Color(0.95, 1, 1, 1)
+polygon = PackedVector2Array(180, 95, 80, 240, 280, 220, 2200, 75, 2070, 245, 2350, 220, 4850, 85, 4700, 260, 5025, 230)
+
+[node name="Player" parent="." unique_id=400797747 instance=ExtResource("2_player")]
+position = Vector2(90, 360)
+
+[node name="Level" type="Node2D" parent="." unique_id=1858590768]
+
+[node name="GroundStart" type="StaticBody2D" parent="Level" unique_id=18385475]
+position = Vector2(600, 432)
+
+[node name="Body" type="Polygon2D" parent="Level/GroundStart" unique_id=247662290]
+color = Color(0.45, 0.54, 0.68, 1)
+polygon = PackedVector2Array(-700, -20, 700, -20, 700, 20, -700, 20)
+
+[node name="SnowTop" type="Polygon2D" parent="Level/GroundStart" unique_id=104647257]
+color = Color(0.98, 1, 1, 1)
+polygon = PackedVector2Array(-700, -20, 700, -20, 700, -4, -700, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/GroundStart" unique_id=509121838]
+shape = SubResource("GroundShape")
+
+[node name="GroundMid" type="StaticBody2D" parent="Level" unique_id=323516051]
+position = Vector2(2300, 432)
+
+[node name="Body" type="Polygon2D" parent="Level/GroundMid" unique_id=166706789]
+color = Color(0.45, 0.54, 0.68, 1)
+polygon = PackedVector2Array(-850, -20, 850, -20, 850, 20, -850, 20)
+
+[node name="SnowTop" type="Polygon2D" parent="Level/GroundMid" unique_id=283156113]
+color = Color(0.98, 1, 1, 1)
+polygon = PackedVector2Array(-850, -20, 850, -20, 850, -4, -850, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/GroundMid" unique_id=1901146235]
+shape = SubResource("GroundWideShape")
+
+[node name="GroundEnd" type="StaticBody2D" parent="Level" unique_id=1415816031]
+position = Vector2(4750, 432)
+
+[node name="Body" type="Polygon2D" parent="Level/GroundEnd" unique_id=1032935742]
+color = Color(0.45, 0.54, 0.68, 1)
+polygon = PackedVector2Array(-1150, -20, 1150, -20, 1150, 20, -1150, 20)
+
+[node name="SnowTop" type="Polygon2D" parent="Level/GroundEnd" unique_id=1523830609]
+color = Color(0.98, 1, 1, 1)
+polygon = PackedVector2Array(-1150, -20, 1150, -20, 1150, -4, -1150, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/GroundEnd" unique_id=978844741]
+shape = SubResource("GroundWideShape")
+
+[node name="GroundFar" type="StaticBody2D" parent="Level" unique_id=542059873]
+position = Vector2(6500, 432)
+
+[node name="Body" type="Polygon2D" parent="Level/GroundFar" unique_id=109692398]
+color = Color(0.45, 0.54, 0.68, 1)
+polygon = PackedVector2Array(-750, -20, 750, -20, 750, 20, -750, 20)
+
+[node name="SnowTop" type="Polygon2D" parent="Level/GroundFar" unique_id=1088667642]
+color = Color(0.98, 1, 1, 1)
+polygon = PackedVector2Array(-750, -20, 750, -20, 750, -4, -750, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/GroundFar" unique_id=1213536982]
+shape = SubResource("GroundFarShape")
+
+[node name="Platform1" type="StaticBody2D" parent="Level" unique_id=741973562]
+position = Vector2(1250, 275)
+
+[node name="Body" type="Polygon2D" parent="Level/Platform1" unique_id=1217345138]
+color = Color(0.42, 0.68, 0.88, 1)
+polygon = PackedVector2Array(-110, -14, 110, -14, 110, 14, -110, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/Platform1" unique_id=185769286]
+color = Color(0.72, 0.96, 1, 1)
+polygon = PackedVector2Array(-110, -14, 110, -14, 110, -5, -110, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform1" unique_id=1236266362]
+shape = SubResource("PlatformShape")
+
+[node name="Icicles" type="Polygon2D" parent="Level/Platform1" unique_id=1984095944]
+color = Color(0.82, 0.98, 1, 0.95)
+polygon = PackedVector2Array(-90, 14, -55, 14, -73, 64, -25, 14, 10, 14, -8, 72, 45, 14, 82, 14, 62, 66)
+
+[node name="Platform2" type="StaticBody2D" parent="Level" unique_id=846403933]
+position = Vector2(1850, 190)
+
+[node name="Body" type="Polygon2D" parent="Level/Platform2" unique_id=1609821181]
+color = Color(0.42, 0.68, 0.88, 1)
+polygon = PackedVector2Array(-110, -14, 110, -14, 110, 14, -110, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/Platform2" unique_id=1015928141]
+color = Color(0.72, 0.96, 1, 1)
+polygon = PackedVector2Array(-110, -14, 110, -14, 110, -5, -110, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform2" unique_id=1387418438]
+shape = SubResource("PlatformShape")
+
+[node name="Icicles" type="Polygon2D" parent="Level/Platform2" unique_id=1588844148]
+color = Color(0.82, 0.98, 1, 0.95)
+polygon = PackedVector2Array(-95, 14, -58, 14, -78, 70, -5, 14, 35, 14, 15, 60, 62, 14, 98, 14, 82, 76)
+
+[node name="Platform3" type="StaticBody2D" parent="Level" unique_id=1693212969]
+position = Vector2(2380, 125)
+
+[node name="Body" type="Polygon2D" parent="Level/Platform3" unique_id=1951699402]
+color = Color(0.42, 0.68, 0.88, 1)
+polygon = PackedVector2Array(-165, -14, 165, -14, 165, 14, -165, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/Platform3" unique_id=1108258610]
+color = Color(0.72, 0.96, 1, 1)
+polygon = PackedVector2Array(-165, -14, 165, -14, 165, -5, -165, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform3" unique_id=1322177787]
+shape = SubResource("WidePlatformShape")
+
+[node name="Icicles" type="Polygon2D" parent="Level/Platform3" unique_id=2014565591]
+color = Color(0.82, 0.98, 1, 0.95)
+polygon = PackedVector2Array(-138, 14, -98, 14, -118, 82, -55, 14, -15, 14, -35, 66, 28, 14, 70, 14, 48, 78, 110, 14, 150, 14, 130, 70)
+
+[node name="Platform4" type="StaticBody2D" parent="Level" unique_id=1329332717]
+position = Vector2(3220, 250)
+
+[node name="Body" type="Polygon2D" parent="Level/Platform4" unique_id=1744638390]
+color = Color(0.42, 0.68, 0.88, 1)
+polygon = PackedVector2Array(-165, -14, 165, -14, 165, 14, -165, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/Platform4" unique_id=5133922]
+color = Color(0.72, 0.96, 1, 1)
+polygon = PackedVector2Array(-165, -14, 165, -14, 165, -5, -165, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform4" unique_id=824781777]
+shape = SubResource("WidePlatformShape")
+
+[node name="Icicles" type="Polygon2D" parent="Level/Platform4" unique_id=1204443299]
+color = Color(0.82, 0.98, 1, 0.95)
+polygon = PackedVector2Array(-145, 14, -105, 14, -126, 76, -68, 14, -30, 14, -50, 86, 12, 14, 55, 14, 32, 68, 92, 14, 135, 14, 112, 80)
+
+[node name="Platform5" type="StaticBody2D" parent="Level" unique_id=1642958562]
+position = Vector2(4100, 220)
+
+[node name="Body" type="Polygon2D" parent="Level/Platform5" unique_id=774471729]
+color = Color(0.42, 0.68, 0.88, 1)
+polygon = PackedVector2Array(-110, -14, 110, -14, 110, 14, -110, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/Platform5" unique_id=2038074815]
+color = Color(0.72, 0.96, 1, 1)
+polygon = PackedVector2Array(-110, -14, 110, -14, 110, -5, -110, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform5" unique_id=558764870]
+shape = SubResource("PlatformShape")
+
+[node name="Icicles" type="Polygon2D" parent="Level/Platform5" unique_id=1882390413]
+color = Color(0.82, 0.98, 1, 0.95)
+polygon = PackedVector2Array(-90, 14, -55, 14, -73, 68, -20, 14, 18, 14, 0, 56, 55, 14, 92, 14, 72, 70)
+
+[node name="Platform4Helper" type="StaticBody2D" parent="Level" unique_id=330969438]
+position = Vector2(3700, 300)
+
+[node name="Body" type="Polygon2D" parent="Level/Platform4Helper" unique_id=568849735]
+color = Color(0.42, 0.68, 0.88, 1)
+polygon = PackedVector2Array(-110, -14, 110, -14, 110, 14, -110, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/Platform4Helper" unique_id=373622555]
+color = Color(0.72, 0.96, 1, 1)
+polygon = PackedVector2Array(-110, -14, 110, -14, 110, -5, -110, -5)
+
+[node name="Icicles" type="Polygon2D" parent="Level/Platform4Helper" unique_id=809935748]
+color = Color(0.82, 0.98, 1, 0.95)
+polygon = PackedVector2Array(-90, 14, -54, 14, -72, 66, 8, 14, 45, 14, 26, 58)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform4Helper" unique_id=1231274412]
+shape = SubResource("PlatformShape")
+
+[node name="Platform6" type="StaticBody2D" parent="Level" unique_id=1713181980]
+position = Vector2(6000, 245)
+
+[node name="Body" type="Polygon2D" parent="Level/Platform6" unique_id=978978433]
+color = Color(0.42, 0.68, 0.88, 1)
+polygon = PackedVector2Array(-165, -14, 165, -14, 165, 14, -165, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/Platform6" unique_id=1607543009]
+color = Color(0.72, 0.96, 1, 1)
+polygon = PackedVector2Array(-165, -14, 165, -14, 165, -5, -165, -5)
+
+[node name="Icicles" type="Polygon2D" parent="Level/Platform6" unique_id=1155613513]
+color = Color(0.82, 0.98, 1, 0.95)
+polygon = PackedVector2Array(-145, 14, -105, 14, -126, 76, -30, 14, 12, 14, -8, 68, 82, 14, 135, 14, 112, 82)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform6" unique_id=234950497]
+position = Vector2(2.75, 0)
+shape = SubResource("WidePlatformShape")
+
+[node name="Platform7" type="StaticBody2D" parent="Level" unique_id=1585943043]
+position = Vector2(6560, 160)
+
+[node name="Body" type="Polygon2D" parent="Level/Platform7" unique_id=2110517010]
+color = Color(0.42, 0.68, 0.88, 1)
+polygon = PackedVector2Array(-165, -14, 165, -14, 165, 14, -165, 14)
+
+[node name="Top" type="Polygon2D" parent="Level/Platform7" unique_id=1096795322]
+color = Color(0.72, 0.96, 1, 1)
+polygon = PackedVector2Array(-165, -14, 165, -14, 165, -5, -165, -5)
+
+[node name="Icicles" type="Polygon2D" parent="Level/Platform7" unique_id=523615433]
+color = Color(0.82, 0.98, 1, 0.95)
+polygon = PackedVector2Array(-135, 14, -95, 14, -115, 90, -48, 14, -2, 14, -24, 72, 55, 14, 105, 14, 82, 86)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform7" unique_id=1515037207]
+position = Vector2(-6.5, 0)
+shape = SubResource("WidePlatformShape")
+
+[node name="IcePine1" type="Polygon2D" parent="Level" unique_id=1252992590]
+position = Vector2(520, 355)
+color = Color(0.04, 0.2, 0.25, 1)
+polygon = PackedVector2Array(0, -100, 60, -20, 34, -20, 72, 42, -72, 42, -34, -20, -60, -20)
+
+[node name="IceCrystal1" type="Polygon2D" parent="Level" unique_id=669525367]
+position = Vector2(4600, 370)
+color = Color(0.7, 0.98, 1, 0.85)
+polygon = PackedVector2Array(0, -70, 25, -6, 12, 42, -12, 42, -25, -6)
+
+[node name="IcePatch1" parent="." unique_id=1126885570 instance=ExtResource("7_ice")]
+position = Vector2(722, 416)
+
+[node name="IcePatch2" parent="." unique_id=1498959174 instance=ExtResource("7_ice")]
+position = Vector2(2056, 413)
+
+[node name="IcePatch3" parent="." unique_id=2066766066 instance=ExtResource("7_ice")]
+position = Vector2(4380, 415)
+
+[node name="IcePatch4" parent="." unique_id=1226298876 instance=ExtResource("7_ice")]
+position = Vector2(6098, 414)
+
+[node name="Crate1" parent="." unique_id=979228454 instance=ExtResource("5_crate")]
+position = Vector2(1250, 360)
+
+[node name="Crate2" parent="." unique_id=1782774355 instance=ExtResource("5_crate")]
+position = Vector2(3074, 364)
+
+[node name="BouncePad1" parent="." unique_id=945852195 instance=ExtResource("6_bounce")]
+position = Vector2(1700, 403)
+
+[node name="BouncePad2" parent="." unique_id=2062497566 instance=ExtResource("6_bounce")]
+position = Vector2(3800, 403)
+
+[node name="IceSlip" parent="." unique_id=847825014 instance=ExtResource("7_ice")]
+position = Vector2(1251, 262)
+
+[node name="IceSlip2" parent="." unique_id=870462529 instance=ExtResource("7_ice")]
+position = Vector2(1852, 177)
+
+[node name="IceSlip3" parent="." unique_id=13541165 instance=ExtResource("7_ice")]
+position = Vector2(2380, 113)
+
+[node name="IceSlip4" parent="." unique_id=554663632 instance=ExtResource("7_ice")]
+position = Vector2(3223, 237)
+
+[node name="IceSlip5" parent="." unique_id=40292739 instance=ExtResource("7_ice")]
+position = Vector2(4102, 205)
+
+[node name="IceSlipHelper" parent="." unique_id=764446787 instance=ExtResource("7_ice")]
+position = Vector2(3699, 286)
+
+[node name="Enemy1" parent="." unique_id=1333372575 instance=ExtResource("4_enemy")]
+position = Vector2(876, 392)
+
+[node name="Enemy2" parent="." unique_id=1883465543 instance=ExtResource("4_enemy")]
+position = Vector2(2920, 394)
+
+[node name="BouncePad3" parent="." unique_id=1521153987 instance=ExtResource("6_bounce")]
+position = Vector2(5850, 403)
+
+[node name="IceSlip6" parent="." unique_id=1675972801 instance=ExtResource("7_ice")]
+position = Vector2(5999, 231)
+
+[node name="IceSlip7" parent="." unique_id=1790524175 instance=ExtResource("7_ice")]
+position = Vector2(6595, 147)
+
+[node name="Coin1" parent="." unique_id=999182717 instance=ExtResource("3_coin")]
+position = Vector2(520, 258)
+
+[node name="Coin2" parent="." unique_id=268645472 instance=ExtResource("3_coin")]
+position = Vector2(1250, 231)
+
+[node name="Coin3" parent="." unique_id=526223879 instance=ExtResource("3_coin")]
+position = Vector2(1845, 59)
+
+[node name="Coin4" parent="." unique_id=1875639757 instance=ExtResource("3_coin")]
+position = Vector2(2380, 81)
+
+[node name="Coin5" parent="." unique_id=1048044311 instance=ExtResource("3_coin")]
+position = Vector2(2800, 388)
+
+[node name="Coin6" parent="." unique_id=529222218 instance=ExtResource("3_coin")]
+position = Vector2(3220, 206)
+
+[node name="Coin7" parent="." unique_id=812044524 instance=ExtResource("3_coin")]
+position = Vector2(3600, 388)
+
+[node name="Coin8" parent="." unique_id=595556029 instance=ExtResource("3_coin")]
+position = Vector2(4100, 176)
+
+[node name="Coin9" parent="." unique_id=1781369489 instance=ExtResource("3_coin")]
+position = Vector2(4380, 388)
+
+[node name="Coin10" parent="." unique_id=207584515 instance=ExtResource("3_coin")]
+position = Vector2(4700, 388)
+
+[node name="Coin11" parent="." unique_id=420476691 instance=ExtResource("3_coin")]
+position = Vector2(5050, 388)
+
+[node name="Coin12" parent="." unique_id=485953552 instance=ExtResource("3_coin")]
+position = Vector2(5400, 388)
+
+[node name="Coin13" parent="." unique_id=205594298 instance=ExtResource("3_coin")]
+position = Vector2(1700, 340)
+
+[node name="Coin14" parent="." unique_id=1980345646 instance=ExtResource("3_coin")]
+position = Vector2(3800, 340)
+
+[node name="Coin15" parent="." unique_id=45333215 instance=ExtResource("3_coin")]
+position = Vector2(3220, 206)
+
+[node name="Coin16" parent="." unique_id=1828968544 instance=ExtResource("3_coin")]
+position = Vector2(5550, 388)
+
+[node name="Coin17" parent="." unique_id=916722049 instance=ExtResource("3_coin")]
+position = Vector2(6000, 201)
+
+[node name="Coin18" parent="." unique_id=813752169 instance=ExtResource("3_coin")]
+position = Vector2(6600, 116)
+
+[node name="Coin19" parent="." unique_id=576459970 instance=ExtResource("3_coin")]
+position = Vector2(7135, 273)
+
+[node name="LevelPortal" parent="." unique_id=1049693936 instance=ExtResource("8_portal")]
+position = Vector2(7101, 59)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=262901091]
+
+[node name="CoinLabel" type="Label" parent="UI" unique_id=154063113]
+offset_left = 18.0
+offset_top = 14.0
+offset_right = 180.0
+offset_bottom = 55.0
+text = "0/12"
+label_settings = SubResource("LabelSettings_ui")
+
+[node name="ItemPopup" type="Label" parent="UI" unique_id=917438036]
+offset_left = 18.0
+offset_top = 52.0
+offset_right = 520.0
+offset_bottom = 92.0
+label_settings = SubResource("LabelSettings_ui")
+
+[node name="NextLevelButton" type="Button" parent="UI" unique_id=1403759333]
+visible = false
+offset_left = 382.0
+offset_top = 220.0
+offset_right = 578.0
+offset_bottom = 282.0
+text = "Next Level"
+
+[node name="SummitStep4" type="StaticBody2D" parent="." unique_id=889850464]
+position = Vector2(7100, 140)
+
+[node name="Body" type="Polygon2D" parent="SummitStep4" unique_id=1892116039]
+color = Color(0.42, 0.5, 0.62, 1)
+polygon = PackedVector2Array(-150, -14, 150, -14, 150, 14, -150, 14)
+
+[node name="Top" type="Polygon2D" parent="SummitStep4" unique_id=1055856967]
+color = Color(0.98, 1, 1, 1)
+polygon = PackedVector2Array(-150, -14, 150, -14, 150, -5, -150, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SummitStep4" unique_id=909992474]
+shape = SubResource("RectangleShape2D_cp0jt")

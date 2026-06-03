@@ -1,0 +1,17 @@
+# Godot generated/editor cache
+.godot/
+
+# Build/export output
+Builds/
+SimpleCSharpPlatformer_Windows/
+SimpleCSharpPlatformer_Windows.zip
+
+# .NET build output
+bin/
+obj/
+
+# User/editor local files
+*.tmp
+*.log
+*.old
+*.slnx

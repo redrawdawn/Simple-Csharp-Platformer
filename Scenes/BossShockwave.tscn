@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scripts/BossShockwave.cs" id="1_wave_script"]
+
+[sub_resource type="RectangleShape2D" id="WaveShape"]
+size = Vector2(70, 28)
+
+[node name="BossShockwave" type="Area2D"]
+script = ExtResource("1_wave_script")
+collision_mask = 1
+
+[node name="WaveGlow" type="Polygon2D" parent="."]
+color = Color(1, 0.32, 0.12, 0.38)
+polygon = PackedVector2Array(-48, 17, -25, -12, 4, -21, 48, -4, 54, 17)
+
+[node name="WaveFront" type="Polygon2D" parent="."]
+color = Color(1, 0.08, 0.04, 0.9)
+polygon = PackedVector2Array(-35, 13, -22, -6, 0, -14, 30, -4, 35, 13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WaveShape")
