@@ -37,6 +37,7 @@ public partial class MovingPlatform : AnimatableBody2D
 
     public void Activate()
     {
+        _time = -Mathf.Pi / 2.0f;
         _isActive = true;
     }
 }

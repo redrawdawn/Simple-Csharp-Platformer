@@ -7,6 +7,7 @@ public partial class Enemy : Area2D
     [Export] public float PatrolDistance = 130.0f;
     [Export] public bool RespawnWhileBossAlive = false;
     [Export] public float RespawnDelay = 10.0f;
+    [Export] public float RespawnSafeDistance = 220.0f;
 
     private Vector2 _startPosition;
     private float _direction = 1.0f;
@@ -32,6 +33,12 @@ public partial class Enemy : Area2D
 
             if (_respawnTimer <= 0.0f && IsBossAlive())
             {
+                if (!CanRespawnSafely())
+                {
+                    _respawnTimer = 0.5f;
+                    return;
+                }
+
                 RespawnEnemy();
             }
 
@@ -42,9 +49,14 @@ public partial class Enemy : Area2D
         Position += new Vector2(_direction * Speed * (float)delta, 0);
         RotationDegrees += _direction * 70.0f * (float)delta;
 
-        if (Mathf.Abs(Position.X - _startPosition.X) >= PatrolDistance)
+        float distanceFromStart = Position.X - _startPosition.X;
+
+        if (Mathf.Abs(distanceFromStart) >= PatrolDistance)
         {
-            _direction *= -1.0f;
+            // Clamp to the edge of the patrol path so the enemy cannot get stuck
+            // flipping direction while slightly outside its lane.
+            Position = new Vector2(_startPosition.X + Mathf.Sign(distanceFromStart) * PatrolDistance, Position.Y);
+            _direction = -Mathf.Sign(distanceFromStart);
         }
     }
 
@@ -86,10 +98,31 @@ public partial class Enemy : Area2D
     {
         _defeated = false;
         _touchCooldown = 0.0f;
+        _direction = 1.0f;
+        RotationDegrees = 0.0f;
         Position = _startPosition;
         Visible = true;
         Monitoring = true;
         Monitorable = true;
+    }
+
+    private bool CanRespawnSafely()
+    {
+        Player player = GameManager.Find(this)?.GetPlayer();
+
+        if (player == null)
+        {
+            return true;
+        }
+
+        Vector2 respawnPosition = _startPosition;
+
+        if (GetParent() is Node2D parent)
+        {
+            respawnPosition = parent.ToGlobal(_startPosition);
+        }
+
+        return player.GlobalPosition.DistanceTo(respawnPosition) >= RespawnSafeDistance;
     }
 
     private bool IsBossAlive()

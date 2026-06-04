@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/LevelPortal.tscn" id="9_portal"]
 [ext_resource type="PackedScene" path="res://Scenes/SpeedPowerup.tscn" id="10_speed"]
 [ext_resource type="Script" uid="uid://c3pebxjn8nvd6" path="res://Scripts/BossExitController.cs" id="11_boss_exit"]
-[ext_resource type="PackedScene" path="res://Scenes/BossEnemy.tscn" id="12_boss"]
+[ext_resource type="PackedScene" uid="uid://bhtqk44bwtetv" path="res://Scenes/BossEnemy.tscn" id="12_boss"]
 [ext_resource type="PackedScene" path="res://Scenes/CheckpointFlag.tscn" id="13_flag"]
 [ext_resource type="PackedScene" path="res://Scenes/ShieldPowerup.tscn" id="14_shield"]
 
@@ -22,7 +22,7 @@ size = Vector2(1300, 40)
 size = Vector2(1800, 40)
 
 [sub_resource type="RectangleShape2D" id="ArenaShape"]
-size = Vector2(2400, 40)
+size = Vector2(1800, 40)
 
 [sub_resource type="RectangleShape2D" id="PlatformShape"]
 size = Vector2(230, 28)
@@ -143,11 +143,11 @@ position = Vector2(11100, 432)
 
 [node name="Body" type="Polygon2D" parent="Level/GroundArena" unique_id=932394170]
 color = Color(0.15, 0.15, 0.19, 1)
-polygon = PackedVector2Array(-1200, -20, 1200, -20, 1200, 20, -1200, 20)
+polygon = PackedVector2Array(-900, -20, 900, -20, 900, 20, -900, 20)
 
 [node name="Top" type="Polygon2D" parent="Level/GroundArena" unique_id=1590694461]
 color = Color(0.34, 0.32, 0.42, 1)
-polygon = PackedVector2Array(-1200, -20, 1200, -20, 1200, -4, -1200, -4)
+polygon = PackedVector2Array(-900, -20, 900, -20, 900, -4, -900, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/GroundArena" unique_id=448804069]
 shape = SubResource("ArenaShape")
@@ -237,13 +237,13 @@ polygon = PackedVector2Array(-190, -14, 190, -14, 190, -5, -190, -5)
 shape = SubResource("WidePlatformShape")
 
 [node name="BossGateLeft" type="Polygon2D" parent="Level" unique_id=1014576319]
-position = Vector2(10020, 320)
-color = Color(0.1, 0.08, 0.16, 1)
+position = Vector2(10255, 320)
+color = Color(0.101960786, 0.078431375, 0.16078432, 0.6666667)
 polygon = PackedVector2Array(-40, 92, -22, -170, 22, -170, 40, 92)
 
 [node name="BossGateRight" type="Polygon2D" parent="Level" unique_id=1889365095]
-position = Vector2(12200, 320)
-color = Color(0.1, 0.08, 0.16, 1)
+position = Vector2(11930, 320)
+color = Color(0.101960786, 0.078431375, 0.16078432, 0.74509805)
 polygon = PackedVector2Array(-40, 92, -22, -170, 22, -170, 40, 92)
 
 [node name="BossSymbol" type="Polygon2D" parent="Level" unique_id=1178315370]
@@ -269,7 +269,9 @@ position = Vector2(8970, 44)
 
 [node name="BossEnemy" parent="." unique_id=1117968491 instance=ExtResource("12_boss")]
 position = Vector2(11100, 140)
-PatrolDistance = 780.0
+PatrolDistance = 900.0
+FollowSpeed = 190.0
+FollowRange = 1100.0
 
 [node name="MovingPlatformH1" parent="." unique_id=183779909 instance=ExtResource("8_moving_platform")]
 position = Vector2(1420, 305)
@@ -317,8 +319,8 @@ TravelOffset = Vector2(420, 0)
 MoveSpeed = 1.8
 
 [node name="BossExitPlatform" parent="." unique_id=206375964 instance=ExtResource("8_moving_platform")]
-position = Vector2(12400, 428)
-TravelOffset = Vector2(0, -285)
+position = Vector2(12400, 143)
+TravelOffset = Vector2(0, 285)
 MoveSpeed = 1.05
 StartsActive = false
 
@@ -327,9 +329,6 @@ position = Vector2(1180, 360)
 
 [node name="Crate2" parent="." unique_id=1668037117 instance=ExtResource("5_crate")]
 position = Vector2(4980, 360)
-
-[node name="Crate3" parent="." unique_id=2107308846 instance=ExtResource("5_crate")]
-position = Vector2(10180, 360)
 
 [node name="BouncePad1" parent="." unique_id=1683025801 instance=ExtResource("6_bounce")]
 position = Vector2(1780, 403)
@@ -385,18 +384,22 @@ position = Vector2(9300, 362)
 [node name="ArenaEnemy1" parent="." unique_id=194605275 instance=ExtResource("4_enemy")]
 position = Vector2(10480, 394)
 RespawnWhileBossAlive = true
+RespawnSafeDistance = 260.0
 
 [node name="ArenaEnemy2" parent="." unique_id=730854501 instance=ExtResource("4_enemy")]
 position = Vector2(11100, 394)
 RespawnWhileBossAlive = true
+RespawnSafeDistance = 260.0
 
 [node name="ArenaEnemy3" parent="." unique_id=671047440 instance=ExtResource("4_enemy")]
 position = Vector2(11720, 394)
 RespawnWhileBossAlive = true
+RespawnSafeDistance = 260.0
 
 [node name="ArenaEnemy4" parent="." unique_id=4254383 instance=ExtResource("4_enemy")]
-position = Vector2(12120, 394)
+position = Vector2(11900, 394)
 RespawnWhileBossAlive = true
+RespawnSafeDistance = 260.0
 
 [node name="Coin1" parent="." unique_id=1260942744 instance=ExtResource("3_coin")]
 position = Vector2(980, 271)
@@ -471,7 +474,7 @@ position = Vector2(8900, 46)
 position = Vector2(9300, 342)
 
 [node name="Coin21" parent="." unique_id=1796388833 instance=ExtResource("3_coin")]
-position = Vector2(9900, 388)
+position = Vector2(10331, 393)
 
 [node name="Coin22" parent="." unique_id=1381511982 instance=ExtResource("3_coin")]
 position = Vector2(10420, 388)

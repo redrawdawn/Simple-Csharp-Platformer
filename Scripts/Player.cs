@@ -294,6 +294,7 @@ public partial class Player : CharacterBody2D
         Fireball fireball = _fireballScene.Instantiate<Fireball>();
         fireball.GlobalPosition = GlobalPosition + new Vector2(_facingDirection * 28.0f, -6.0f);
         fireball.Direction = _facingDirection;
+        fireball.Speed = HasSpeedBoost ? 760.0f : fireball.Speed;
         GetTree().CurrentScene.AddChild(fireball);
         SoundManager.Play(this, "res://Audio/fireball.wav", -8.0f);
     }
